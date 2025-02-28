@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my_python_app
+    ports:
+      - "5000:5000"  # Пробрасываем порт 5000 из контейнера на хост
+    volumes:
+      - .:/app  # Монтируем текущую директорию в /app внутри контейнера (опционально, для разработки)
+    environment:
+      - FLASK_ENV=production  # Пример переменной окружения (настройте под свои нужды)
+    restart: unless-stopped  # Автоматически перезапускать контейнер, если он остановлен
